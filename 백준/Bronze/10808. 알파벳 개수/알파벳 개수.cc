@@ -1,22 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
-string s;
-vector<int> v;
+string str;
+int cnt[26];
 int main()
 {
-	cin>>s;
-	for(char i='a';i<='z';i++)
+	cin>>str;
+	for(char a:str)
 	{
-		int cnt=0;
-		for(int j=0;j<s.size();j++)
-		{
-			if(s[j]==i)
-			{
-				cnt++;
-			}
-		}
-		v.push_back(cnt);
+		cnt[a-'a']++; //b(98) - a(97) = cnt[1]++; 
 	}
-	for(int bb:v)cout<<bb<<" ";
+	for(int i=0;i<26;i++)
+	{
+		cout<<cnt[i]<<" ";
+	}
 	return 0;
 }
