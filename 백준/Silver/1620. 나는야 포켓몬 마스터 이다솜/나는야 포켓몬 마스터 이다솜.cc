@@ -1,35 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 int n,m;
-unordered_map<int,string> poket;
-unordered_map<string,int> reverse_poket;
-vector<string> str;
+string s;
+map<string,int> mp1;
+map<int,string> mp2;
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin>>n>>m;
 	for(int i=1;i<=n;i++)
 	{
-		string s;
 		cin>>s;
-		poket[i]=s;
-		reverse_poket[s]=i;
+		mp1[s]=i;
+		mp2[i]=s;
 	}
 	for(int i=0;i<m;i++)
 	{
-		string s1;
-		cin>>s1;
-		str.push_back(s1);
-	}
-	
-	for(int j=0;j<m;j++)
-	{
-		if(atoi(str[j].c_str())!=0)
+		cin>>s;
+		if(atoi(s.c_str())==0)
 		{
-			cout<<poket[atoi(str[j].c_str())]<<"\n";
+			cout<<mp1[s]<<"\n";
 		}
 		else
 		{
-			cout<<reverse_poket[str[j]]<<"\n";
+			cout<<mp2[atoi(s.c_str())]<<"\n";
 		}
 	}
 	return 0;
