@@ -1,36 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
-int A,B,C,total;
-vector<pair<int,int>> p(3);
-vector<int> t(100,0);
+int arr[100];
+int a,b,c,x,y,sum;
 int main()
 {
-	cin>>A>>B>>C;
+	cin>>a>>b>>c;
 	for(int i=0;i<3;i++)
 	{
-		cin>>p[i].first>>p[i].second;
+		cin>>x>>y;
+		for(int i=x;i<y;i++)
+		{
+			arr[i]++;
+		}
 	}
-	for(int i=0;i<3;i++)
+	
+	for(int array : arr)
 	{
-		for(int j=p[i].first;j<p[i].second;j++)
-		{
-			t[j]++;
-		}
+		if(array==1) sum+=array*a;
+		else if(array==2) sum+=array*b;
+		else if(array==3) sum+=array*c; 
 	}
-	for(int i=0;i<100;i++)
-	{
-		if(t[i]==1)
-		{
-			total+=t[i]*A;
-		}
-		else if(t[i]==2)
-		{
-			total+=t[i]*B;
-		}
-		else if(t[i]==3)
-		{
-			total+=t[i]*C;
-		}
-	}
-	cout<<total;
+	cout<<sum;
 }
