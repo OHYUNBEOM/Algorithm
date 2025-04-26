@@ -1,20 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
-string s;
+int n;
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
-	while(cin>>s)
+	while(cin>>n)
 	{
-		int mod = 1%stoi(s);
-		int len=1;
-		while(mod!=0)
+		int cnt=1,ret=1;
+		while(true)
 		{
-			mod = (mod*10+1)%stoi(s);
-			len++;
+			if(cnt%n==0)
+			{
+				cout<<ret<<"\n"<<flush;
+				break;
+			}
+			else
+			{
+				cnt = (cnt*10+1);
+				cnt%=n;
+				ret++;
+			}
 		}
-		cout<<len<<endl;
 	} 
 	return 0;
 }
