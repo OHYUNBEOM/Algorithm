@@ -1,2 +1,0 @@
-# codingtest
-Prepare codingtest
