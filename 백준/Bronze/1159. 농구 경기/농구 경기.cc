@@ -1,34 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n,cnt;
-string name,result;
-vector<string> str;
-map<char,int> mapp;
+int n;
+string s;
+map<char,int> mp;
+vector<char> c;
 int main()
 {
 	cin>>n;
 	for(int i=0;i<n;i++)
 	{
-		cin>>name;
-		mapp[name[0]]++;
+		cin>>s;
+		mp[s[0]]++;
 	}
-	for(auto it : mapp)
+	for(auto it : mp)
 	{
 		if(it.second>=5)
 		{
-			result+=it.first;
-			cnt++;
+			c.push_back(it.first);
 		}
 	}
-	
-	if(cnt==0)
-	{
-		cout<<"PREDAJA";
-		exit(0);
-	}
+	if(c.size()==0) cout<<"PREDAJA";
 	else
 	{
-		cout<<result;
+		for(char cc : c)cout<<cc;
 	}
-	return 0;
 }
