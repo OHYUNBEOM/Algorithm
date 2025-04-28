@@ -1,9 +1,8 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-string s,front,center,behind;
-char ch;
+int cnt;
+string s,first,second,middle;
 map<char,int> mp;
-int cnt_2,cnt_3; 
 int main()
 {
 	cin>>s;
@@ -15,24 +14,16 @@ int main()
 	{
 		if(it.second%2==1)
 		{
-			cnt_3++;
-			center = it.first;
-			it.second--;
+			cnt++;
+			middle=it.first;
 		}
-		for(int i=0; i<it.second/2;i++)
+		for(int i=0;i<it.second/2;i++)
 		{
-			front+=it.first;
+			first+=it.first;
 		}
 	}
-	if(cnt_3>1)
-	{
-		cout<<"I'm Sorry Hansoo";
-	}
-	else
-	{
-		behind = front;
-		reverse(behind.begin(),behind.end());
-		cout<<front+center+behind<<"\n";
-	}
-	return 0;
+	second = first;
+	reverse(second.begin(),second.end());
+	if(cnt>1)cout<<"I'm Sorry Hansoo";
+	else cout<<first+middle+second;
 }
