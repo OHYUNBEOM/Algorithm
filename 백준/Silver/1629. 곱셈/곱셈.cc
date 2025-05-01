@@ -1,21 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
-long long a,b,c;
-long long go(long long a, long long b)
+typedef long long ll;
+ll a,b,c;
+ll ret;
+ll go(ll a,ll b)
 {
 	if(b==1) return a%c;
-	long long ret = go(a,b/2); // 2^8 = 2^4 * 2^4
+	ret = go(a,b/2);
 	ret = (ret * ret)%c;
 	if(b%2==1)
 	{
-		ret=(ret*a)%c;
+		ret = (ret * a)%c;
 	}
 	return ret;
 }
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);cout.tie(NULL);
 	cin>>a>>b>>c;
-	cout<<go(a,b)<<"\n"; 
+	cout<<go(a,b);
 }
