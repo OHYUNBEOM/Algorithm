@@ -1,41 +1,42 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n,m,nx,ny,xx,yy;
+const int dy[] = {-1,0,1,0};
+const int dx[] = {0,1,0,-1};
+int n,m,ny,nx,y,x;
 int a[104][104];
 int visited[104][104];
-const int dy[4]={-1,0,1,0};
-const int dx[4]={0,1,0,-1};
-void BFS(int y,int x)
+void BFS(int sy, int sx)
 {
 	queue<pair<int,int>> q;
-	visited[y][x]=1;
-	q.push({y,x});
+	q.push({sy,sx});
+	visited[sy][sx]=1;
 	while(q.size())
 	{
-		tie(yy,xx) = q.front(); q.pop();
+		tie(y,x) = q.front(); q.pop();
 		for(int i=0;i<4;i++)
 		{
-			ny = yy + dy[i];
-			nx = xx + dx[i];
-			if(ny <0 || ny >= n || nx <0 || nx >=m || a[ny][nx]==0) continue;
-			if(visited[ny][nx]) continue;
-			visited[ny][nx] = visited[yy][xx]+1;	
-			q.push({ny,nx});
+			ny = y + dy[i];
+			nx = x + dx[i];
+			if(ny<0 || ny>=n || nx<0 || nx>=m) continue;
+			if(a[ny][nx]==0) continue;
+			if(!(visited[ny][nx]) && a[ny][nx]==1)
+			{
+				visited[ny][nx] = visited[y][x] +1;
+				q.push({ny,nx});
+			}
 		}
 	}
 }
 int main()
 {
-	cin>>n>>m;
+	scanf("%d %d",&n,&m);
 	for(int i=0;i<n;i++)
 	{
-		string line;
-		cin>>line;
 		for(int j=0;j<m;j++)
 		{
-			a[i][j] = line[j] - '0';
+			scanf("%1d",&a[i][j]);
 		}
 	}
 	BFS(0,0);
-	cout<<visited[n-1][m-1]; // include start / if not, -1 
+	cout<<visited[n-1][m-1];
 }
