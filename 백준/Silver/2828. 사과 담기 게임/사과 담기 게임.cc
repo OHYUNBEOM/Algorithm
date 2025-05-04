@@ -10,9 +10,6 @@ int main()
 	for(int i=0;i<j;i++)
 	{
 		cin>>arr[i];
-	}
-	for(int i=0;i<j;i++)
-	{
 		if(arr[i]>=l&&arr[i]<=r) continue;
 		if(arr[i]>r)
 		{
