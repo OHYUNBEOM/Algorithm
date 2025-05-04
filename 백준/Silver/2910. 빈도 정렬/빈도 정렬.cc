@@ -10,14 +10,11 @@ bool cmp(int a, int b){
 
 int main(){
     cin >> n >> c;
-    for (int i = 0; i < n; ++i){
+    for (int i = 0; i < n; i++){
         cin >> temp;
         v.push_back(temp);
-        if(m1[temp]) ++m1[temp];
-        else{
-            m1[temp] = 1;
-            m2[temp] = i;
-        }
+        m1[temp]++;
+        if(m2.count(temp)==0) m2[temp]=i;
     }
     sort(v.begin(), v.end(), cmp);
     for(int i:v) cout << i << " ";
