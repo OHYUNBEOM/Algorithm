@@ -16,33 +16,21 @@ int main()
 	}
 	for(int i=0;i<h;i++)
 	{
-		idx=0;
-		s="";
+		idx=-1;
 		for(int j=0;j<w;j++)
 		{
-			s+=a[i][j];
-			if(s.find('c')==string::npos)
+			if(a[i][j]=='c')
+			{
+				idx=j;
+				b[i][j]=0;
+			}
+			else if(idx==-1)
 			{
 				b[i][j]=-1;
 			}
-			if(a[i][j]=='c')
+			else
 			{
-				b[i][j]=0;
-			}
-			if(a[i][j]=='.')
-			{
-				if(j==0) b[i][j]=-1;
-				for(int k=0;k<s.size();k++)
-				{
-					if(s[k]=='c')
-					{
-						idx=k;
-					}
-				}
-				if(s.find('c')!=string::npos && s.find('c')<j)
-				{
-					b[i][j] = j-idx;
-				}
+				b[i][j]=j-idx;
 			}
 		}
 	}
