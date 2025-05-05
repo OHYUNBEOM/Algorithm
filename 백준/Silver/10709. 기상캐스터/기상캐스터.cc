@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int h,w,cnt,idx;
+int h,w,idx;
 char a[104][104];
 int b[104][104];
 string s;
@@ -16,7 +16,7 @@ int main()
 	}
 	for(int i=0;i<h;i++)
 	{
-		cnt=0,idx=0;
+		idx=0;
 		s="";
 		for(int j=0;j<w;j++)
 		{
@@ -31,7 +31,6 @@ int main()
 			}
 			if(a[i][j]=='.')
 			{
-				cnt++;
 				if(j==0) b[i][j]=-1;
 				for(int k=0;k<s.size();k++)
 				{
@@ -44,13 +43,6 @@ int main()
 				{
 					b[i][j] = j-idx;
 				}
-			}
-		}
-		if(cnt==w)
-		{
-			for(int j=0;j<w;j++)
-			{
-				b[i][j]=-1;
 			}
 		}
 	}
