@@ -1,34 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n,o,A,B,asum,bsum;
-string s,priv;
-string print(int a)
-{
-	string d = "00" + to_string(a/60);
-	string e = "00" + to_string(a%60);
-	return d.substr(d.size()-2,2)+":"+e.substr(e.size()-2,2);
-}
-int changetoint(string a)
-{
-	return atoi(a.substr(0,2).c_str()) * 60 + atoi(a.substr(3,2).c_str());
-}
-void go(int &sum,string s)
-{
-	sum+=(changetoint(s)-changetoint(priv));
-}
+int n,priv,cur_time,team_num,mm,ss,team1,team2,team1_lead_time,team2_lead_time;
+int total_time = 48*60;
 int main()
 {
-	cin>>n;
+	scanf("%d",&n);
 	for(int i=0;i<n;i++)
 	{
-		cin>>o>>s;
-		if(A>B)go(asum,s);
-		else if(B>A)go(bsum,s);
-		o == 1 ? A++ : B++;
-		priv=s;
+		scanf("%d %2d:%2d",&team_num,&mm,&ss);
+		cur_time=mm*60+ss;
+		
+		if(team1>team2) team1_lead_time += cur_time-priv;
+		if(team2>team1) team2_lead_time += cur_time-priv;
+		if(team_num==1) team1++;
+		else team2++;
+		priv=cur_time;
 	}
-	if(A>B)go(asum,"48:00");
-	else if(B>A)go(bsum,"48:00");
-	cout<<print(asum)<<"\n";
-	cout<<print(bsum)<<"\n";
+	if(priv<total_time)
+	{
+		if(team1>team2) team1_lead_time += total_time-priv;
+		if(team2>team1) team2_lead_time += total_time-priv;
+	}
+	printf("%02d:%02d\n",team1_lead_time/60,team1_lead_time%60);
+	printf("%02d:%02d\n",team2_lead_time/60,team2_lead_time%60);
 }
