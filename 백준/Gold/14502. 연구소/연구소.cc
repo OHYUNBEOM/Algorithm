@@ -2,7 +2,7 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int n,m,ny,nx,max_value;
+int n,m,nx,ny,max_value;
 int a[12][12];
 vector<pair<int,int>> v;
 void DFS(int y,int x,int a_copy[12][12])
@@ -19,18 +19,17 @@ void DFS(int y,int x,int a_copy[12][12])
 		}
 	}
 }
-void combi(int start,vector<pair<int,int>> &b)
+void combi(int start, vector<pair<int,int>> &b)
 {
 	if(b.size()==3)
 	{
 		int a_copy[12][12];
 		memcpy(a_copy,a,sizeof(a));
-		
 		for(auto it : b)
 		{
 			int y = it.first;
 			int x = it.second;
-			a_copy[y][x] = 1;
+			a_copy[it.first][it.second] = 1;
 		}
 		
 		for(int i=0;i<n;i++)
@@ -57,7 +56,6 @@ void combi(int start,vector<pair<int,int>> &b)
 		}
 		
 		max_value = max(max_value,safe);
-		
 		return;
 	}
 	for(int i=start+1;i<v.size();i++)
@@ -78,7 +76,6 @@ int main()
 			if(a[i][j]==0) v.push_back({i,j});
 		}
 	}
-	
 	vector<pair<int,int>> vv;
 	combi(-1,vv);
 	
