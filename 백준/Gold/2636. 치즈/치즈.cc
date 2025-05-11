@@ -38,11 +38,13 @@ int main()
 		memset(visited,0,sizeof(visited));
 		v.clear();
 		DFS(0,0);
+		cnt1++;
 		cnt2=v.size();
 		for(int i=0;i<v.size();i++)
 		{
 			a[v[i].first][v[i].second]=0;
 		}
+		
 		bool flag=0;
 		for(int i=0;i<n;i++)
 		{
@@ -54,7 +56,6 @@ int main()
 				}
 			}
 		}
-		cnt1++;
 		if(flag==0) break;
 	}
 	cout<<cnt1<<"\n"<<cnt2<<"\n";
