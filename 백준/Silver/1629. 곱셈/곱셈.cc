@@ -1,9 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-ll a,b,c;
-ll ret;
-ll go(ll a,ll b)
+ll a,b,c,ret;
+ll go(ll a, ll b)
 {
 	if(b==1) return a%c;
 	ret = go(a,b/2);
