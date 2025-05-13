@@ -2,28 +2,29 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int n,ret,ny,nx;
-int mx = -1;
+int n,mx,ny,nx,cntt;
 int a[104][104];
 int visited[104][104];
 vector<int> v;
-void DFS(int sy, int sx)
+void DFS(int y,int x)
 {
-	visited[sy][sx]=1;
+	visited[y][x]=1;
 	for(int i=0;i<4;i++)
 	{
-		ny = sy + dy[i];
-		nx = sx + dx[i];
-		if(ny<0 || ny>=n || nx<0 || ny>=n) continue;
-		if(a[ny][nx]<=mx) continue;
-		if(a[ny][nx]>mx && !(visited[ny][nx]))
+		ny = y + dy[i];
+		nx = x + dx[i];
+		if(ny<0 || ny>=n || nx<0 || nx>=n || a[ny][nx]<=mx || visited[ny][nx]==1) continue;
+		if(a[ny][nx]>mx)
 		{
 			DFS(ny,nx);
 		}
 	}
+	return;
 }
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin>>n;
 	for(int i=0;i<n;i++)
 	{
@@ -36,12 +37,12 @@ int main()
 	while(mx--)
 	{
 		memset(visited,0,sizeof(visited));
-		ret=0;
+		int ret=0;
 		for(int i=0;i<n;i++)
 		{
 			for(int j=0;j<n;j++)
 			{
-				if(a[i][j]>mx && !(visited[i][j]))
+				if(a[i][j]>mx && visited[i][j]==0)
 				{
 					ret++;
 					DFS(i,j);
@@ -50,7 +51,9 @@ int main()
 		}
 		v.push_back(ret);
 	}
-	int max_val = *max_element(v.begin(),v.end());
-	cout<<max_val<<"\n";
-	return 0;
+	for(int vv : v)
+	{
+		cntt = max(cntt,vv);
+	}
+	cout<<cntt<<"\n";
 }
