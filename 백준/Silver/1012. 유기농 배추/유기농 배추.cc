@@ -2,7 +2,7 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int tc,m,n,k,ret,ny,nx;
+int tc,n,m,k,y,x,cnt,ny,nx;
 int a[54][54];
 int visited[54][54];
 void DFS(int sy,int sx)
@@ -10,15 +10,14 @@ void DFS(int sy,int sx)
 	visited[sy][sx]=1;
 	for(int i=0;i<4;i++)
 	{
-		ny = sy + dy[i];
-		nx = sx + dx[i];
-		if(ny<0 || ny>=n || nx<0 || nx>=m) continue;
-		if(a[ny][nx]==1 && visited[ny][nx]==0)
+		ny = sy+dy[i];
+		nx = sx+dx[i];
+		if(ny<0 || ny>=n || nx<0 || nx>=m || visited[ny][nx]) continue;
+		if(a[ny][nx]==1 && !visited[ny][nx])
 		{
 			DFS(ny,nx);
 		}
 	}
-	return;
 }
 int main()
 {
@@ -27,25 +26,24 @@ int main()
 	{
 		memset(a,0,sizeof(a));
 		memset(visited,0,sizeof(visited));
-		cin>>m>>n>>k;
+		cnt=0;
+		cin>>n>>m>>k;
 		for(int i=0;i<k;i++)
 		{
-			int y,x;
-			cin>>x>>y;
+			cin>>y>>x;
 			a[y][x]=1;
 		}
-		ret=0;
 		for(int i=0;i<n;i++)
 		{
 			for(int j=0;j<m;j++)
 			{
-				if(a[i][j]==1 && !(visited[i][j]))
+				if(a[i][j]==1 && visited[i][j]==0)
 				{
-					ret++;
+					cnt++;
 					DFS(i,j);
 				}
 			}
 		}
-		cout<<ret<<"\n";
+		cout<<cnt<<"\n";
 	}
 }
