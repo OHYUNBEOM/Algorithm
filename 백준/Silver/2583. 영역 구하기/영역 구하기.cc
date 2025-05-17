@@ -2,26 +2,24 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int m,n,k,ret1,ret2;
-int y,x,yy,xx,ny,nx;
+int m,n,k,x,y,xx,yy,cnt1,cnt2,ny,nx;
 vector<int> v;
 int a[104][104];
 int visited[104][104];
-void DFS(int sy,int sx)
+void DFS(int y, int x)
 {
-	visited[sy][sx]=1;
-	ret2++;
+	cnt2++;
+	visited[y][x]=1;
 	for(int i=0;i<4;i++)
 	{
-		ny = sy + dy[i];
-		nx = sx + dx[i];
-		if(ny<0 || ny>=m || nx<0 || nx>=n) continue;
-		if(a[ny][nx]==0 && !visited[ny][nx])
+		ny = y+dy[i];
+		nx = x+dx[i];
+		if(ny<0 || ny>=m || nx<0 || nx>=n || visited[ny][nx]) continue;
+		if(a[ny][nx]==0)
 		{
-			DFS(ny,nx); 
+			DFS(ny,nx);
 		}
 	}
-	return;
 }
 int main()
 {
@@ -43,14 +41,14 @@ int main()
 		{
 			if(a[i][j]==0 && !visited[i][j])
 			{
-				ret2=0;
+				cnt1++;
 				DFS(i,j);
-				ret1++;
-				v.push_back(ret2);
+				v.push_back(cnt2);
+				cnt2=0;
 			}
 		}
 	}
-	cout<<ret1<<"\n";
 	sort(v.begin(),v.end());
-	for(auto it : v)cout<<it<<" ";
+	cout<<cnt1<<"\n";
+	for(int vv : v) cout<<vv<<" ";
 }
