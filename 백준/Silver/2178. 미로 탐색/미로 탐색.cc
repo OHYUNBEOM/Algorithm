@@ -2,7 +2,7 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int n,m,ny,nx;
+int n,m,y,x,ny,nx;
 int a[104][104];
 int visited[104][104];
 void BFS(int sy,int sx)
@@ -12,14 +12,13 @@ void BFS(int sy,int sx)
 	q.push({sy,sx});
 	while(q.size())
 	{
-		int y,x;
 		tie(y,x)=q.front(); q.pop();
 		for(int i=0;i<4;i++)
 		{
 			ny=y+dy[i];
 			nx=x+dx[i];
 			if(ny<0 || ny>=n || nx<0 || nx>=m || visited[ny][nx]) continue;
-			if(a[ny][nx]==1 && !visited[ny][nx])
+			if(a[ny][nx]==1)
 			{
 				q.push({ny,nx});
 				visited[ny][nx] = visited[y][x]+1;
@@ -38,5 +37,5 @@ int main()
 		}
 	}
 	BFS(0,0);
-	cout<<visited[n-1][m-1]<<"\n";
+	cout<<visited[n-1][m-1];
 }
