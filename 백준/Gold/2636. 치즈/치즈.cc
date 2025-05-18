@@ -2,26 +2,27 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int n,m,cnt1,cnt2,ny,nx;
+int n,m,ny,nx,ret,last_cnt,cur_cnt;
 int a[104][104];
 int visited[104][104];
-vector<pair<int,int>> v;
+int contact[104][104];
 void DFS(int y,int x)
 {
 	visited[y][x]=1;
-	if(a[y][x]==1)
-	{
-		v.push_back({y,x});
-		return;
-	}
 	for(int i=0;i<4;i++)
 	{
 		ny=y+dy[i];
 		nx=x+dx[i];
 		if(ny<0 || ny>=n || nx<0 || nx>=m || visited[ny][nx]) continue;
-		DFS(ny,nx);
+		if(a[ny][nx]==0)
+		{
+			DFS(ny,nx);
+		}
+		else if(a[ny][nx]==1)
+		{
+			contact[ny][nx]=1;
+		}
 	}
-	return;
 }
 int main()
 {
@@ -36,23 +37,25 @@ int main()
 	while(true)
 	{
 		memset(visited,0,sizeof(visited));
-		v.clear();
+		memset(contact,0,sizeof(contact));
+		cur_cnt=0;
 		DFS(0,0);
-		cnt1++;
-		cnt2=v.size();
-		for(int i=0;i<v.size();i++)
-		{
-			a[v[i].first][v[i].second]=0;
-		}
-		bool flag=0;
+		bool flag=1;
 		for(int i=0;i<n;i++)
 		{
 			for(int j=0;j<m;j++)
 			{
-				if(a[i][j]!=0) flag=1;
+				if(a[i][j]==1 && contact[i][j]==1)
+				{
+					cur_cnt++;
+					a[i][j]=0;
+					flag=0;
+				}
 			}
 		}
-		if(flag==0) break;
+		if(flag) break;
+		ret++;
+		last_cnt=cur_cnt;
 	}
-	cout<<cnt1<<"\n"<<cnt2;
+	cout<<ret<<"\n"<<last_cnt;
 }
