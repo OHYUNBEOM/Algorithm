@@ -16,6 +16,8 @@ int w(int a,int b,int c)
 }
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	while(true)
 	{
 		cin>>a>>b>>c;
