@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n,temp;
-stack<int> stk;
+int n;
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin>>n;
 	vector<int> v(n);
 	vector<int> ans(n,-1);
@@ -11,17 +12,15 @@ int main()
 	{
 		cin>>v[i];
 	}
-	for(int i=n-1;i>=0;i--)
+	stack<pair<int,int>> stk;
+	for(int i=0;i<n;i++)
 	{
-		while(stk.size()&&v[stk.top()]<=v[i])
+		while(stk.size() && stk.top().second < v[i])
 		{
+			ans[stk.top().first]=v[i];
 			stk.pop();
 		}
-		if(stk.size())
-		{
-			ans[i]=v[stk.top()];
-		}
-		stk.push(i);
+		stk.push({i,v[i]});
 	}
 	for(int i=0;i<n;i++)
 	{
