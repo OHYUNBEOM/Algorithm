@@ -12,13 +12,10 @@ int main()
 		v.push_back(temp);
 	}
 	while(v.size()<3) v.push_back(0);
-	
+	vector<int> dmg={1,3,9};
 	queue<tuple<int,int,int>> q;
 	q.push(make_tuple(v[0],v[1],v[2]));
-	dp[v[0]][v[1]][v[2]]=1;
-	vector<int> dmg={9,3,1};
-	sort(dmg.begin(),dmg.end());
-	while(q.size())
+	while(q.size()) 
 	{
 		int a,b,c;
 		tie(a,b,c)=q.front(); q.pop();
@@ -34,5 +31,5 @@ int main()
 			}
 		}while(next_permutation(dmg.begin(),dmg.end()));
 	}
-	cout<<dp[0][0][0]-1;
+	cout<<dp[0][0][0];;
 }
