@@ -3,7 +3,6 @@ using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
 int n,l,r,ny,nx,sum;
-bool flag;
 int a[54][54];
 int visited[54][54];
 vector<pair<int,int>> united;
@@ -21,7 +20,7 @@ void dfs(int y,int x)
 		if(diff>=l && diff<=r)
 		{
 			dfs(ny,nx);
-		}		
+		}
 	}
 }
 int main()
@@ -37,7 +36,7 @@ int main()
 	int day=0;
 	while(true)
 	{
-		flag=false;
+		bool flag=false;
 		memset(visited,0,sizeof(visited));
 		for(int i=0;i<n;i++)
 		{
@@ -45,17 +44,17 @@ int main()
 			{
 				if(!visited[i][j])
 				{
-					united.clear();
 					sum=0;
+					united.clear();
 					dfs(i,j);
 					if(united.size()>1)
 					{
+						flag=true;
 						int avg=sum/united.size();
 						for(auto it : united)
 						{
 							a[it.first][it.second]=avg;
 						}
-						flag=true;
 					}
 				}
 			}
