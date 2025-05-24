@@ -2,48 +2,26 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int n,l,r,ny,nx;
+int n,l,r,ny,nx,sum;
 bool flag;
 int a[54][54];
-int a_copy[54][54];
 int visited[54][54];
-void bfs(int sy,int sx)
+vector<pair<int,int>> united;
+void dfs(int y,int x)
 {
-	visited[sy][sx]=1;
-	queue<pair<int,int>> q;
-	vector<pair<int,int>> united;
-	q.push({sy,sx});
-	united.push_back({sy,sx});
-	int sum=a[sy][sx];
-	int cnt=1;
-	while(q.size())
+	visited[y][x]=1;
+	united.push_back({y,x});
+	sum+=a[y][x];
+	for(int i=0;i<4;i++)
 	{
-		int y,x;
-		tie(y,x) = q.front(); q.pop();
-		for(int i=0;i<4;i++)
+		ny=y+dy[i];
+		nx=x+dx[i];
+		if(ny<0 || ny>=n || nx<0 || nx>=n || visited[ny][nx]) continue;
+		int diff=abs(a[y][x]-a[ny][nx]);
+		if(diff>=l && diff<=r)
 		{
-			ny=y+dy[i];
-			nx=x+dx[i];
-			if(ny<0 || ny>=n || nx<0 || nx>=n || visited[ny][nx]) continue;
-			int diff = abs(a[y][x]-a[ny][nx]);
-			if(diff>=l && diff<=r)
-			{
-				visited[ny][nx]=1;
-				q.push({ny,nx});
-				united.push_back({ny,nx});
-				sum+=a[ny][nx];
-				cnt++;
-			}
-		}
-	}
-	if(cnt>1)
-	{
-		int avg = sum/cnt;
-		for(auto it : united)
-		{
-			a[it.first][it.second]=avg;
-		}
-		flag=true;
+			dfs(ny,nx);
+		}		
 	}
 }
 int main()
@@ -67,7 +45,18 @@ int main()
 			{
 				if(!visited[i][j])
 				{
-					bfs(i,j);
+					united.clear();
+					sum=0;
+					dfs(i,j);
+					if(united.size()>1)
+					{
+						int avg=sum/united.size();
+						for(auto it : united)
+						{
+							a[it.first][it.second]=avg;
+						}
+						flag=true;
+					}
 				}
 			}
 		}
