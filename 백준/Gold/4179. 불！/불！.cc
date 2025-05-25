@@ -2,9 +2,8 @@
 using namespace std;
 const int dy[] = {-1,0,1,0};
 const int dx[] = {0,1,0,-1};
-int r,c,ny,nx,nny,nnx;
+int r,c;
 char a[1004][1004];
-int fire[1004][1004]; 
 int visited[1004][1004];
 int visited_fire[1004][1004];
 queue<pair<int,int>> q_fire;
@@ -18,8 +17,8 @@ void bfs_fire()
 		tie(y,x) = q_fire.front(); q_fire.pop();
 		for(int i=0;i<4;i++)
 		{
-			ny=y+dy[i];
-			nx=x+dx[i];
+			int ny=y+dy[i];
+			int nx=x+dx[i];
 			if(ny<0 || ny>=r || nx<0 || nx>=c || visited_fire[ny][nx] || a[ny][nx]=='#') continue;
 			visited_fire[ny][nx] = visited_fire[y][x]+1;
 			q_fire.push({ny,nx});
@@ -40,14 +39,14 @@ void bfs_jinsoo()
 		}
 		for(int i=0;i<4;i++)
 		{
-			nny=y+dy[i];
-			nnx=x+dx[i];
-			if(nny<0 || nny>=r || nnx<0 || nnx>=c || a[nny][nnx]=='#' || visited[nny][nnx]) continue;
+			int ny=y+dy[i];
+			int nx=x+dx[i];
+			if(ny<0 || ny>=r || nx<0 || nx>=c || a[ny][nx]=='#' || visited[ny][nx]) continue;
 			
-			if(visited_fire[nny][nnx]!=0 && visited_fire[nny][nnx]<=visited[y][x]+1) continue;
+			if(visited_fire[ny][nx]!=0 && visited_fire[ny][nx]<=visited[y][x]+1) continue;
 			
-			visited[nny][nnx]=visited[y][x]+1;
-			q_jinsoo.push({nny,nnx});
+			visited[ny][nx]=visited[y][x]+1;
+			q_jinsoo.push({ny,nx});
 		}
 	}
 }
