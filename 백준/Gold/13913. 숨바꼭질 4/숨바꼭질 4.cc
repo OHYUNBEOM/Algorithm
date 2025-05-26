@@ -29,11 +29,9 @@ int main()
 	}
 	cout<<dist[k]<<"\n";
 	vector<int> v;
-	int i = k;
-	while(i!=-1)
+	for(int i=k;i!=-1;i=prevNode[i])
 	{
 		v.push_back(i);
-		i=prevNode[i];
 	}
 	reverse(v.begin(),v.end());
 	for(int vv : v)cout<<vv<<" ";
