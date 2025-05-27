@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-using namespace std; 
+using namespace std;
 int n,k;
 const int MAX=500000;
 int visited[2][MAX+1];
@@ -22,14 +22,14 @@ int main()
 		
 		if(visited[time%2][brother])
 		{
-			cout<<time<<"\n";
+			cout<<time;
 			return 0;
 		}
 		
 		int qsize=q.size();
-		for(int i=0;i<qsize;i++)	
+		for(int i=0;i<qsize;i++)
 		{
-			int cur=q.front();q.pop();
+			int cur = q.front(); q.pop();
 			for(int next : {cur+1,cur-1,cur*2})
 			{
 				if(next<0 || next>MAX) continue;
@@ -43,6 +43,6 @@ int main()
 		}
 		time++;
 	}
-	cout<<-1<<"\n";
+	cout<<-1;
 	return 0;
 }
