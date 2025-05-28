@@ -18,11 +18,6 @@ void BFS(int sy,int sx)
 		{
 			int y,x;
 			tie(y,x)=cur.front();cur.pop();
-			if(y==y22-1 && x==x22-1)
-			{
-				cout<<turn;
-				return;
-			}
 			for(int i=0;i<4;i++)
 			{
 				ny = y+dy[i];
@@ -40,6 +35,11 @@ void BFS(int sy,int sx)
 					next.push({ny,nx});
 				}
 			}
+		}
+		if(visited[y22-1][x22-1])
+		{
+			cout<<turn;
+			return;
 		}
 		while(next.size())
 		{
