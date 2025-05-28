@@ -14,7 +14,6 @@ void BFS(int sy,int sx)
 	int turn=1;
 	while(true)
 	{
-		memset(visited,0,sizeof(visited));
 		while(cur.size())
 		{
 			int y,x;
