@@ -14,11 +14,12 @@ void BFS(int sy,int sx)
 	int turn=1;
 	while(true)
 	{
+		memset(visited,0,sizeof(visited));
 		while(cur.size())
 		{
 			int y,x;
 			tie(y,x)=cur.front();cur.pop();
-			if(y==x22 && x==y22)
+			if(y==y22-1 && x==x22-1)
 			{
 				cout<<turn;
 				return;
@@ -49,13 +50,11 @@ void BFS(int sy,int sx)
 			cur.push({y,x});
 		}
 		turn++;
-		memset(visited,0,sizeof(visited));
 	}
 }
 int main()
 {
-   cin>>n>>m>>x11>>y11>>x22>>y22;
-   x11--; y11--; x22--; y22--;
+   cin>>n>>m>>y11>>x11>>y22>>x22;
    for(int i=0;i<n;i++)
    {
       for(int j=0;j<m;j++)
@@ -63,5 +62,5 @@ int main()
          cin>>c[i][j];
       }
    }
-   BFS(x11,y11);
+   BFS(y11-1,x11-1);
 }
