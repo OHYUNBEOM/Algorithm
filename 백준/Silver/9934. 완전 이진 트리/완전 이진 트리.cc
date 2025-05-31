@@ -1,38 +1,33 @@
 #include<bits/stdc++.h>
 using namespace std;
-int k,n;
-vector<int> inorder;  
-vector<vector<int>> level; // 레벨 별 node , vector<int> inorder가 들어감 
-void DFS(int start, int end, int depth)
+int k,n,temp;
+vector<int> inorder;
+vector<vector<int>> levels;
+void dfs(int start, int end, int depth)
 {
 	if(start>end) return;
-	int mid=(start+end)/2;
-	level[depth].push_back(inorder[mid]);
-	// 왼쪽 서브트리 
-	DFS(start,mid-1,depth+1);
-	// 오른쪽 서브트리
-	DFS(mid+1,end,depth+1); 
+	int mid = (start+end)/2;
+	levels[depth].push_back(inorder[mid]);
+	dfs(start,mid-1,depth+1); // 왼쪽 서브트리 
+	dfs(mid+1,end,depth+1); // 오른쪽 서브트리 
 }
 int main()
 {
 	cin>>k;
-	n=pow(2,k)-1;
-	level.resize(k);
+	n=pow(2,k)-1; // 노드 갯수 
 	for(int i=0;i<n;i++)
 	{
-		int temp;
 		cin>>temp;
-		inorder.push_back(temp);
+		inorder.push_back(temp); // inorder = node 목록  
 	}
-	DFS(0,n-1,0); // start,end,depth
-	
-	for(int i=0;i<level.size();i++)
+	levels.resize(k);
+	dfs(0,n-1,0);
+	for(int i=0;i<k;i++)
 	{
-		for(int a : level[i])
+		for(int val : levels[i])
 		{
-			cout<<a<<" ";
+			cout<<val<<" ";
 		}
 		cout<<"\n";
 	}
-	return 0;
 }
