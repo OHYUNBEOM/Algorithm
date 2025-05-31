@@ -1,29 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
 int k;
-string mx="0",mn="9999999999";
+string mx = "0",mn="99999999999";
 char c[10];
-bool visited[10]; // 0 ~ 9
+bool visited[10];
 bool oper(int a,int b,char c)
 {
-	if(c=='<') return a<b;
-	else if (c=='>') return a>b;
+	if(c=='>') return a>b;
+	else if(c=='<') return a<b;
 }
-void DFS(int depth,string num)
+void DFS(int cnt,string num)
 {
-	if(depth==k+1)
+	if(cnt==k+1)
 	{
-		if(num<mn) mn=num;
-		if(num>mx) mx=num;
+		if(mx<num) mx=num;
+		if(mn>num) mn=num;
 		return;
 	}
 	for(int i=0;i<=9;i++)
 	{
 		if(visited[i]) continue;
-		if(depth>=1 && !oper(num[depth-1]-'0',i,c[depth-1])) continue;
-		visited[i]=true;
-		DFS(depth+1,num+to_string(i));
-		visited[i]=false;
+		if(cnt>=1 && !oper(num[cnt-1]-'0',i,c[cnt-1])) continue;
+		if(!visited[i])
+		{
+			visited[i]=true;
+			DFS(cnt+1,num+to_string(i));
+			visited[i]=false;
+		}
 	}
 }
 int main()
@@ -31,9 +34,8 @@ int main()
 	cin>>k;
 	for(int i=0;i<k;i++)
 	{
-		cin>>c[i];
+		cin>>c[i];	
 	}
-	string s="";
-	DFS(0,s);
+	DFS(0,"");
 	cout<<mx<<"\n"<<mn;
 }
