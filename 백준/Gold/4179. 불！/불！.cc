@@ -45,7 +45,7 @@ void bfs_man()
 			man.push({ny,nx});
 		}
 	}
-	cout<<"IMPOSSIBLE";
+	cout<<"IMPOSSIBLE"; // 가능한 경로 모두 탐색했으나, return을 만나지 않았다= 가장자리에 도달하지 못했다 = 탈출하지 못했다 
 }
 int main()
 {
