@@ -1,32 +1,29 @@
 #include<bits/stdc++.h>
 using namespace std;
 int k;
-string mx = "0",mn="99999999999";
 char c[10];
+string mx="0",mn="99999999999";
 bool visited[10];
-bool oper(int a,int b,char c)
+bool oper(int a,int b,char cc)
 {
-	if(c=='>') return a>b;
-	else if(c=='<') return a<b;
+	if(cc=='>') return a>b;
+	else if(cc=='<') return a<b;
 }
-void DFS(int cnt,string num)
+void dfs(int idx,string s)
 {
-	if(cnt==k+1)
+	if(idx==k+1)
 	{
-		if(mx<num) mx=num;
-		if(mn>num) mn=num;
+		if(mx<s) mx=s;
+		if(mn>s) mn=s;
 		return;
 	}
 	for(int i=0;i<=9;i++)
 	{
 		if(visited[i]) continue;
-		if(cnt>=1 && !oper(num[cnt-1]-'0',i,c[cnt-1])) continue;
-		if(!visited[i])
-		{
-			visited[i]=true;
-			DFS(cnt+1,num+to_string(i));
-			visited[i]=false;
-		}
+		if(idx>=1 && !oper(s[idx-1]-'0',i,c[idx-1])) continue;
+		visited[i]=true;
+		dfs(idx+1,s+to_string(i));
+		visited[i]=false;
 	}
 }
 int main()
@@ -34,8 +31,8 @@ int main()
 	cin>>k;
 	for(int i=0;i<k;i++)
 	{
-		cin>>c[i];	
+		cin>>c[i];
 	}
-	DFS(0,"");
+	dfs(0,"");
 	cout<<mx<<"\n"<<mn;
 }
