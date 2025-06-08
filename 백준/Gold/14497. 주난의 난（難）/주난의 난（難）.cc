@@ -2,8 +2,8 @@
 using namespace std;
 const int dy[]={-1,0,1,0};
 const int dx[]={0,1,0,-1};
-int n,m,y,x,y2,x2;
-char c[304][304];
+int n,m,y,x,yy,xx;
+char a[304][304];
 int visited[304][304];
 void bfs(int sy,int sx)
 {
@@ -15,48 +15,50 @@ void bfs(int sy,int sx)
 	{
 		while(cur.size())
 		{
-			int ey,ex;
-			tie(ey,ex)=cur.front(); cur.pop();
+			int y,x;
+			tie(y,x)=cur.front();cur.pop();
 			for(int i=0;i<4;i++)
 			{
-				int ny = ey+dy[i];
-				int nx = ex+dx[i];	
+				int ny=y+dy[i];
+				int nx=x+dx[i];
 				if(ny<0 || ny>=n || nx<0 || nx>=m || visited[ny][nx]) continue;
-				if(c[ny][nx]=='0' || c[ny][nx]=='#')
+				if(a[ny][nx]=='0' || a[ny][nx]=='#')
 				{
 					visited[ny][nx]=1;
 					cur.push({ny,nx});
 				}
-				else if(c[ny][nx]=='1')
+				else if(a[ny][nx]=='1')
 				{
 					visited[ny][nx]=1;
 					next.push({ny,nx});
 				}
-			}
+			} 
 		}
-		if(visited[y2-1][x2-1])
+		
+		if(visited[yy-1][xx-1])
 		{
 			cout<<t;
 			return;
 		}
+		
 		while(next.size())
 		{
-			int ey,ex;
-			tie(ey,ex)=next.front(); next.pop();
-			c[ey][ex]='0';
-			cur.push({ey,ex});
+			int y,x;
+			tie(y,x)=next.front();next.pop();
+			a[y][x]='0';
+			cur.push({y,x});
 		}
 		t++;
 	}
 }
 int main()
 {
-	cin>>n>>m>>y>>x>>y2>>x2;
+	cin>>n>>m>>y>>x>>yy>>xx;
 	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<m;j++)
 		{
-			cin>>c[i][j];
+			cin>>a[i][j];
 		}
 	}
 	bfs(y-1,x-1);
