@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
-int k,n;
+int k;
 vector<int> node;
 vector<vector<int>> level;
-void dfs(int start, int end, int depth)
+void dfs(int start,int end,int depth)
 {
 	if(start>end) return;
 	int mid=(start+end)/2;
@@ -14,20 +14,20 @@ void dfs(int start, int end, int depth)
 int main()
 {
 	cin>>k;
-	n=pow(2,k)-1;
+	int n=pow(2,k)-1;
 	for(int i=0;i<n;i++)
 	{
-		int temp=0;
+		int temp;
 		cin>>temp;
 		node.push_back(temp);
 	}
 	level.resize(k);
 	dfs(0,n-1,0);
-	for(int i=0;i<level.size();i++)
+	for(int i=0;i<k;i++)
 	{
-		for(int val : level[i])
+		for(auto it : level[i])
 		{
-			cout<<val<<" ";
+			cout<<it<<" ";
 		}
 		cout<<"\n";
 	}
