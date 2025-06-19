@@ -19,7 +19,7 @@ int main()
 			if(dist[next]==-1)
 			{
 				dist[next]=dist[start]+1;
-				cnt[next]+=cnt[start];
+				cnt[next]=cnt[start];
 				q.push(next);
 			}
 			else if(dist[next]==dist[start]+1)
