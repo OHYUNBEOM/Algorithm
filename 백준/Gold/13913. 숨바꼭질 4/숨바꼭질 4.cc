@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 int n,k;
-int dist[100004];
-int priv[100004];
+int dist[100004],pre_dist[100004];
 int main()
 {
 	cin>>n>>k;
@@ -13,25 +12,24 @@ int main()
 	while(q.size())
 	{
 		int start=q.front();q.pop();
-		for(int next : {start+1,start-1,start*2})
+		for(int next : {start-1,start+1,start*2})
 		{
 			if(next<0 || next>100000) continue;
 			if(dist[next]==-1)
 			{
+				pre_dist[next]=start;
 				dist[next]=dist[start]+1;
-				priv[next]=start;
 				q.push(next);
 			}
 		}
 	}
 	cout<<dist[k]<<"\n";
 	vector<int> v;
-	for(int i=k;i!=n;i=priv[i])
+	for(int i=k;i!=n;i=pre_dist[i])
 	{
 		v.push_back(i);
 	}
 	v.push_back(n);
 	reverse(v.begin(),v.end());
-	for(int it : v) cout<<it<<" ";
-	return 0;
+	for(int vv : v) cout<<vv<<" ";
 }
