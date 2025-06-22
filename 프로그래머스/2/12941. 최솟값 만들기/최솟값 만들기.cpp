@@ -11,4 +11,6 @@ int solution(vector<int> A, vector<int> B)
         answer += A[i]*B[i]; // 같은 index끼리 곱함
     }
     return answer;
+    // Greedy 최솟값 -> 오름차순 / 내림차순 구성, sum+=A[i]*B[i;
+    // Greedy 최댓값 -> 오름차순 / 오름차순 or 내림차순 / 내림차순 구성, sum += A[i]*B[i];
 }
