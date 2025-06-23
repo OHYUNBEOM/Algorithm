@@ -2,7 +2,7 @@
 using namespace std;
 const int dy[]={-1,0,1,0};
 const int dx[]={0,1,0,-1};
-int n,m,answer;
+int n,m,ret=INT_MAX;
 int a[104][104];
 int visited[104][104];
 void bfs(int sy,int sx)
@@ -36,7 +36,7 @@ int solution(vector<vector<int>> maps)
         }
     }
     bfs(0,0);
-    int answer=visited[n-1][m-1];
+    int answer = visited[n-1][m-1];
     if(answer==0) return -1;
     else return answer;
 }
