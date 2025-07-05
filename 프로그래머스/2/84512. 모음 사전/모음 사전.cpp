@@ -16,7 +16,7 @@ void dfs(string cur,string target)
     {
         cnt++;
         dfs(cur+vowel[i],target);
-        if(ret) return;
+        //if(ret) return;
     }
 }
 int solution(string word) {
