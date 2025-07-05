@@ -20,16 +20,18 @@ int solution(string str1, string str2) {
             str2_map[temp]++;
         }
     }
-    set<string> all_key;
+    
+    set<string> all_key; // 모든 key값 = 다중 집합의 전체 원소 모음
     for(auto it : str1_map) all_key.insert(it.first);
     for(auto it : str2_map) all_key.insert(it.first);
     
-    double inter,uni=0;
+    double inter=0,uni=0; //inter : 교집합,uni : 합집합
     for(auto it : all_key)
     {
-        inter+=min(str1_map[it],str2_map[it]);
-        uni+=max(str1_map[it],str2_map[it]);
+        inter+=min(str1_map[it],str2_map[it]); // 교집합의 개수 : min
+        uni+=max(str1_map[it],str2_map[it]); 
+        // 합집합의 개수 : max -> max(0,1)로 하나만 있는 원소도 들어감
     }
-    if(uni==0) return 65536;
+    if(inter==0 && uni==0) return 65536; // 공집합인 경우 1 * 65536 return
     return (int)(inter/uni*65536);
 }
