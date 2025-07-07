@@ -1,15 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-bool isPrime(long long num)
+bool isPrime(long long n)
 {
-    if(num<2) return false;
-    for(long long i=2;i*i<=num;i++)
+    if(n<2) return false;
+    for(long long i=2;i*i<=n;i++)
     {
-        if(num%i==0) return false;
+        if(n%i==0) return false;
     }
     return true;
 }
-
 string convert(int n,int k)
 {
     string result="";
@@ -20,33 +19,25 @@ string convert(int n,int k)
     }
     return result;
 }
-
 int solution(int n, int k) {
-    string conv = convert(n,k); // 10진수 n -> k진수로 변환
+    string conv=convert(n,k);
     int cnt=0;
     string temp="";
-    
     for(int i=0;i<conv.size();i++)
     {
         if(conv[i]=='0')
         {
-            if(temp.size())
-            {
-                long long num=stoll(temp);
-                if(isPrime(num)) cnt++;
-                temp="";
-            }
+            if(temp.size()&&isPrime(stoll(temp))) cnt++;
+            temp="";
         }
         else
         {
-            temp+=conv[i];
+            temp+=conv[i];    
         }
     }
-    
     if(temp.size())
     {
-        long long num=stoll(temp);
-        if(isPrime(num)) cnt++;
+        if(isPrime(stoll(temp))) cnt++;
     }
     return cnt;
 }
