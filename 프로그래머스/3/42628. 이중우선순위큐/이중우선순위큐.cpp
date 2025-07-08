@@ -1,38 +1,29 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 vector<int> solution(vector<string> operations) {
     int n = operations.size();
     multiset<int> ms;
     for(int i=0;i<n;i++)
     {
-        if(operations[i].substr(0,1)=="I")
+        string command = operations[i].substr(0,1);
+        string value = operations[i].substr(2);
+        if(command=="I")
         {
-            ms.insert(stoi(operations[i].substr(2)));
+            ms.insert(stoi(value));
         }
-        else if(ms.size() && operations[i].substr(0,1)=="D")
+        else if(ms.size() && command=="D")
         {
-            if(operations[i].substr(2)=="1")
+            if(value=="1")
             {
                 ms.erase(*ms.rbegin());
-                //ms.erase(prev(ms.end()));
             }
-            else if(operations[i].substr(2)=="-1") 
+            else if(value=="-1") 
             {
                 ms.erase(*ms.begin());
             }
         }
     }
-    vector<int> answer;
-    if(ms.size()==0)
-    {
-        answer.push_back(0);
-        answer.push_back(0);
-    }
-    else
-    {
-        answer.push_back(*ms.rbegin());
-        answer.push_back(*ms.begin());
-    }
-    return answer;
+    
+    if(ms.empty()) return {0,0};
+    return {*ms.rbegin(),*ms.begin()};
 }
