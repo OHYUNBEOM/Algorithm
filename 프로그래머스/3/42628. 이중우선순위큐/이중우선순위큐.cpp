@@ -7,23 +7,19 @@ vector<int> solution(vector<string> operations) {
     {
         string command = operations[i].substr(0,1);
         string value = operations[i].substr(2);
-        if(command=="I")
+        if(command=="I") ms.insert(stoi(value));
+        else // command == "D"
         {
-            ms.insert(stoi(value));
-        }
-        else if(ms.size() && command=="D")
-        {
-            if(value=="1")
+            if(ms.size() && value=="1")
             {
                 ms.erase(*ms.rbegin());
             }
-            else if(value=="-1") 
+            else if(ms.size() && value=="-1")
             {
                 ms.erase(*ms.begin());
             }
         }
     }
-    
-    if(ms.empty()) return {0,0};
-    return {*ms.rbegin(),*ms.begin()};
+    if(!ms.size()) return {0,0};
+    else return {*ms.rbegin(),*ms.begin()};
 }
