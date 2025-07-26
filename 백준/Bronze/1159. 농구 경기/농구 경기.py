@@ -1,9 +1,11 @@
 n=int(input())
-p=[input().strip() for _ in range(n)]
+p=[]
+for _ in range(n):
+    p.append(input().strip())
 
 mp={}
 for ch in p:
-    init = ch[0]
+    init=ch[0]
     if init in mp:
         mp[init]+=1
     else:
@@ -15,8 +17,6 @@ for i in mp:
         result.append(i)
 
 if result:
-    # print(''.join(sorted(result)))
-    for ch in sorted(result):
-        print(ch,end='')
+    print(''.join(sorted(result)))
 else:
     print('PREDAJA')
