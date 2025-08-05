@@ -7,8 +7,12 @@ def bfs(y,x):
     cur=deque()
     nxt=deque()
     cur.append((y,x))
-    ret=1
+    ret=0
     while True:
+        if visited[x2-1][y2-1]:
+            print(ret)
+            return
+
         while cur:
             sy,sx=cur.popleft()
             for i in range(4):
@@ -22,9 +26,6 @@ def bfs(y,x):
                 elif a[ny][nx]=='1':
                     visited[ny][nx]=True
                     nxt.append((ny,nx))
-        if visited[x2-1][y2-1]:
-            print(ret)
-            return
 
         while nxt:
             sy,sx=nxt.popleft()
